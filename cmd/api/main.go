@@ -12,7 +12,7 @@ import (
 func main() {
 	cfg := config.Load()
 
-	producer := servicebus.NewProducer(cfg.ServiceBusConnectionString, cfg.ServiceBusQueue)
+	producer := servicebus.NewProducer(cfg.ServiceBusConnectionString, cfg.ServiceBusQueue, cfg.ServiceBusReplyQueue)
 
 	router := gin.Default()
 	handler := http.NewHandler(producer)

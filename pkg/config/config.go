@@ -9,6 +9,7 @@ import (
 type Config struct {
 	ServiceBusConnectionString string
 	ServiceBusQueue            string
+	ServiceBusReplyQueue       string
 }
 
 func Load() Config {
@@ -21,5 +22,6 @@ func Load() Config {
 	return Config{
 		ServiceBusConnectionString: os.Getenv("SERVICEBUS_CONNECTION_STRING"),
 		ServiceBusQueue:            os.Getenv("SERVICEBUS_QUEUE"),
+		ServiceBusReplyQueue:       os.Getenv("SERVICEBUS_REPLY_QUEUE"),
 	}
 }

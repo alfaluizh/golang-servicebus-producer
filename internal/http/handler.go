@@ -7,7 +7,7 @@ import (
 )
 
 type Producer interface {
-	Send(string) error
+	Send(string) (string, error)
 }
 
 type Handler struct {
@@ -29,11 +29,11 @@ func (h *Handler) Publish(c *gin.Context) {
 		return
 	}
 
-	err := h.producer.Send(body.Message)
+	response, err := h.producer.Send(body.Message)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"status": "message sent"})
+	c.JSON(http.StatusOK, gin.H{"status": "message sent", "response": response})
 }
